@@ -1,0 +1,12 @@
+{
+  "name": "aiva",
+  "version": "1.0.0",
+  "private": true,
+  "packageManager": "pnpm@11.15.1",
+  "scripts": {
+    "dev": "echo \"Development scripts will be added later\"",
+    "build": "echo \"Build scripts will be added later\"",
+    "lint": "echo \"Lint scripts will be added later\"",
+    "format": "echo \"Format scripts will be added later\""
+  }
+}
