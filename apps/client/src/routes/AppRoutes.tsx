@@ -1,11 +1,15 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Navbar from "../components/Navbar";
+import ProtectedRoute from "../components/ProtectedRoute";
 
 import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Dashboard from "../pages/Dashboard";
+import InterviewSetup from "../pages/InterviewSetup";
+import InterviewRoom from "../pages/InterviewRoom";
+import InterviewResult from "../pages/InterviewResult";
 import NotFound from "../pages/NotFound";
 
 export default function AppRoutes() {
@@ -19,12 +23,51 @@ export default function AppRoutes() {
 
         <Routes>
           <Route path="/" element={<Home />} />
+
           <Route path="/login" element={<Login />} />
+
           <Route path="/register" element={<Register />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/interview/setup"
+            element={
+              <ProtectedRoute>
+                <InterviewSetup />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/interview/room"
+            element={
+              <ProtectedRoute>
+                <InterviewRoom />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/interview/result"
+            element={
+              <ProtectedRoute>
+                <InterviewResult />
+              </ProtectedRoute>
+            }
+          />
+
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
     </BrowserRouter>
   );
 }
+
