@@ -1,15 +1,28 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import InterviewHeader from "../components/interview/InterviewHeader";
 import CameraPreview from "../components/interview/CameraPreview";
+import MicrophoneStatus from "../components/interview/MicrophoneStatus";
 import QuestionPanel from "../components/interview/QuestionPanel";
 import InterviewFooter from "../components/interview/InterviewFooter";
+import useInterviewTimer from "../hooks/useInterviewTimer";
+import TranscriptPanel from "../components/interview/TranscriptPanel";
+import useSpeechRecognition from "../hooks/useSpeechRecognition";
 
 export default function InterviewRoom() {
   const navigate = useNavigate();
+  
+  const { formattedTime } = useInterviewTimer({
+    initialTime: 15 * 60,
+    onComplete: () => navigate("/interview/result"),
+  });
 
-  const [isRecording] = useState(false);
+  const {
+    transcript,
+    isListening,
+    startListening,
+    stopListening,
+  } = useSpeechRecognition();
 
   const question =
     "Tell me about yourself and explain why you want to become a Full Stack Developer.";
@@ -20,19 +33,35 @@ export default function InterviewRoom() {
         <InterviewHeader
           currentQuestion={1}
           totalQuestions={10}
-          timeLeft="15:00"
+          timeLeft={formattedTime}
         />
 
-        <div className="grid gap-6 lg:grid-cols-2">
-          <CameraPreview />
+        <div className="mt-6 grid gap-6 lg:grid-cols-2">
+          {/* Left Section */}
+          <div className="space-y-4">
+            <CameraPreview />
+            <MicrophoneStatus />
+          </div>
 
-          <QuestionPanel question={question} />
+          {/* Right Section */}
+          <div className="space-y-4">
+            <QuestionPanel question={question} />
+
+            <TranscriptPanel
+              transcript={transcript}
+              isListening={isListening}
+            />
+          </div>
         </div>
 
-        <InterviewFooter
-          isRecording={isRecording}
-          onEndInterview={() => navigate("/interview/result")}
-        />
+        <div className="mt-6">
+          <InterviewFooter
+            isRecording={isListening}
+            onStartRecording={startListening}
+            onStopRecording={stopListening}
+            onEndInterview={() => navigate("/interview/result")}
+          />
+        </div>
       </div>
     </div>
   );
