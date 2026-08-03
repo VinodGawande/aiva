@@ -40,11 +40,26 @@ export default function useSpeechRecognition() {
       setIsListening(false);
     };
 
+    recognition.onerror = (event: any) => {
+      console.error("Speech Recognition Error:", event.error);
+      setIsListening(false);
+    };
+
     recognitionRef.current = recognition;
+
+    return () => {
+      recognition.stop();
+    };
   }, []);
 
   const startListening = () => {
-    recognitionRef.current?.start();
+    if (!recognitionRef.current || isListening) return;
+
+    try {
+      recognitionRef.current.start();
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const stopListening = () => {
@@ -64,3 +79,4 @@ export default function useSpeechRecognition() {
     resetTranscript,
   };
 }
+

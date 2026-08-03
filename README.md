@@ -1,154 +1,164 @@
-<div align="center">
+# 🤖 AIVA – AI Voice Interview Assistant
 
-# 🤖 AIVA – AI Virtual Interview Assistant
-
-### An AI-powered mock interview platform built with the MERN Stack
-
-<p align="center">
-
-![React](https://img.shields.io/badge/React-19-blue?logo=react)
-![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)
-![NodeJS](https://img.shields.io/badge/Node.js-22-green?logo=node.js)
-![Express](https://img.shields.io/badge/Express.js-Backend-black?logo=express)
-![MongoDB](https://img.shields.io/badge/MongoDB-Database-green?logo=mongodb)
-![JWT](https://img.shields.io/badge/JWT-Authentication-orange)
-![Status](https://img.shields.io/badge/Status-Under%20Development-yellow)
-
-</p>
+AIVA is a full-stack AI-powered interview platform that simulates real technical interviews using voice interaction. Users can log in, start an interview, answer questions using speech, and receive AI-powered feedback in future versions.
 
 ---
 
-### 🚀 Build realistic AI-powered interviews and receive intelligent feedback.
+# 🚀 Features Implemented
 
-</div>
-
----
-
-# 📖 Table of Contents
-
-- About AIVA
-- Problem Statement
-- Objectives
-- Current Features
-- Tech Stack
-- System Architecture
-- Project Workflow
-- Development Status
-
----
-
-# 📚 About AIVA
-
-AIVA (AI Virtual Interview Assistant) is a production-oriented full-stack web application that simulates real technical interviews using Artificial Intelligence.
-
-The goal of AIVA is to provide candidates with an interview environment similar to real company interviews. Instead of practicing static questions, users can interact with an intelligent interview system that asks questions, records responses, evaluates performance, and provides actionable feedback.
-
-Unlike traditional mock interview platforms, AIVA is being designed as a complete interview ecosystem where authentication, interview management, AI evaluation, and future voice interaction work together seamlessly.
-
-This project is currently being developed using modern web technologies including React, TypeScript, Node.js, Express.js, MongoDB, and JWT Authentication.
-
----
-
-# ❓ Problem Statement
-
-Many students prepare for interviews by reading questions or watching videos, but they rarely experience the pressure and structure of a real interview.
-
-Current challenges include:
-
-- No realistic interview environment
-- Lack of personalized feedback
-- No interview history tracking
-- Limited communication practice
-- No AI-based interviewer
-- No performance analytics
-
-AIVA aims to solve these problems by creating an AI-powered interview platform that closely resembles an actual technical interview.
-
----
-
-# 🎯 Project Objectives
-
-The primary objectives of AIVA are:
-
-- Build a production-ready MERN application
-- Simulate real technical interviews
-- Secure user authentication using JWT
-- Provide an intuitive interview dashboard
-- Create reusable frontend architecture
-- Integrate AI-powered interview capabilities
-- Evaluate candidate performance
-- Generate interview reports
-- Help users improve interview skills through repeated practice
-
----
-
-# ✨ Current Features
-
-## 🔐 Authentication Module
-
-Implemented Features
+## 🔐 Authentication
 
 - User Registration
 - User Login
 - JWT Authentication
-- Password Hashing using bcryptjs
 - Protected Routes
-- Logout
-- Current User API
+- Persistent Login using Local Storage
+- Logout Functionality
+- Current User Profile Fetch
 
 ---
 
-## 📊 Dashboard Module
+## 🎨 Frontend
 
-Implemented Features
+### Landing Page
+- Modern UI
+- Responsive Layout
+- Navigation Bar
 
-- Personalized dashboard
-- Display authenticated user information
-- Start Interview button
-- Secure route access
+### Dashboard
+- User Welcome Screen
+- Logged-in User Details
+- Start Interview Button
+- Logout Button
 
 ---
 
 ## 🎤 Interview Module
 
-Implemented Features
+### Interview Setup
+- Dedicated Interview Setup Page
+- Protected Route
 
-- Interview Setup page
-- Interview Room UI
-- Interview Result UI
-- Complete navigation flow
-
-Interview Flow
-
-Dashboard
-
-↓
-
-Interview Setup
-
-↓
-
-Interview Room
-
-↓
-
-Interview Result
+### Interview Room
+- Professional Interview Layout
+- Responsive Design
+- Live Interview Interface
 
 ---
 
-## 🧩 Reusable Components
+## 📷 Webcam Integration
 
-Current reusable UI components
+- Live Camera Preview
+- Camera Permission Handling
+- Camera Error Handling
+- Live Camera Status
+
+Built using:
+
+- react-webcam
+
+---
+
+## 🎙️ Microphone
+
+- Microphone Permission Check
+- Permission Status Display
+- Recording Status Indicator
+
+---
+
+## 🗣 Speech Recognition
+
+Implemented using the browser Web Speech API.
+
+Features:
+
+- Start Recording
+- Stop Recording
+- Live Speech-to-Text
+- Continuous Listening
+- Live Transcript Display
+- Error Handling
+
+---
+
+## ⏱ Interview Timer
+
+Custom React Hook
+
+Features:
+
+- 15 Minute Countdown
+- Live Timer
+- Auto Redirect on Completion
+
+---
+
+## 📝 Interview Engine (Phase 1)
+
+Implemented using a custom hook.
+
+Features:
+
+- Dynamic Question Loading
+- Multiple Questions
+- Question Progress
+- Previous Question
+- Next Question
+- Answer Storage
+- Interview Reset
+- Progress Calculation
+
+---
+
+## 📊 Progress Tracking
+
+- Dynamic Progress Bar
+- Question Counter
+- Percentage Completion
+
+---
+
+## ⚛ React Architecture
+
+Custom Hooks
+
+- useInterview()
+- useInterviewTimer()
+- useSpeechRecognition()
+
+Reusable Components
 
 - Navbar
-- Button
-- Input
 - AuthLayout
 - ProtectedRoute
-- InterviewHeader
 - CameraPreview
+- MicrophoneStatus
+- InterviewHeader
+- ProgressBar
 - QuestionPanel
+- TranscriptPanel
 - InterviewFooter
+
+---
+
+## 🗂 Project Structure
+
+```
+src
+│
+├── api
+├── components
+│   └── interview
+├── context
+├── data
+├── hooks
+├── pages
+├── routes
+├── styles
+├── types
+└── utils
+```
 
 ---
 
@@ -156,137 +166,76 @@ Current reusable UI components
 
 ## Frontend
 
-| Technology | Purpose |
-|------------|---------|
-| React | User Interface |
-| TypeScript | Type Safety |
-| Vite | Build Tool |
-| Tailwind CSS | Styling |
-| React Router DOM | Routing |
-| Axios | API Requests |
-| Context API | Authentication State |
-
----
+- React 19
+- TypeScript
+- Vite
+- Tailwind CSS
+- React Router DOM
+- React Webcam
 
 ## Backend
 
-| Technology | Purpose |
-|------------|---------|
-| Node.js | Runtime |
-| Express.js | REST API |
-| MongoDB | Database |
-| Mongoose | ODM |
-| JWT | Authentication |
-| bcryptjs | Password Encryption |
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
+- JWT Authentication
+- bcrypt
 
 ---
 
-# 🏗 System Architecture
+# 📌 Current Status
 
-```
-                User
-                  │
-                  │
-                  ▼
-        React + TypeScript
-                  │
-             Axios Requests
-                  │
-                  ▼
-        Express REST API
-                  │
-       JWT Authentication
-                  │
-                  ▼
-             MongoDB Atlas
-```
+### ✅ Completed
 
----
-
-# 🔄 Current Application Workflow
-
-```
-Landing Page
-
-↓
-
-Register/Login
-
-↓
-
-JWT Authentication
-
-↓
-
-Dashboard
-
-↓
-
-Interview Setup
-
-↓
-
-Interview Room
-
-↓
-
-Interview Result
-```
-
----
-
-# 📈 Development Status
-
-## ✅ Completed
-
-✔ Monorepo Setup
-
-✔ React + TypeScript
-
-✔ Express Backend
-
-✔ MongoDB Connection
-
-✔ JWT Authentication
-
-✔ Login
-
-✔ Register
-
-✔ Protected Routes
-
-✔ Dashboard
-
-✔ Interview Setup UI
-
-✔ Interview Room UI
-
-✔ Interview Result UI
-
----
-
-## 🚧 Currently Working On
-
+- Authentication System
+- Protected Routing
+- Dashboard
+- Interview Setup
+- Interview Room
 - Webcam Integration
-- Camera Permission
-- Microphone Access
-- Countdown Timer
+- Speech Recognition
+- Live Transcript
+- Progress Bar
+- Interview Timer
+- Dynamic Question Engine
+- Answer Management Foundation
 
 ---
 
-## 📅 Upcoming Milestones
+# 🚧 In Progress
 
-- Speech-to-Text
-- AI Voice Interviewer
+- Interview Session Management
+- MongoDB Interview Storage
+- Auto Save Answers
+
+---
+
+# 🔜 Upcoming Features
+
+- AI Generated Interview Questions
 - OpenAI Integration
-- AI Evaluation
-- Resume-Based Interview
-- Coding Interview
-- Face Detection
-- Emotion Analysis
+- AI Voice (Text-to-Speech)
+- AI Interview Evaluation
+- Interview Score
+- Detailed Feedback Report
 - Interview History
-- PDF Report
+- Resume Based Interview
+- Company Specific Interview
+- Coding Interview Module
+- Admin Dashboard
 
 ---
 
-> **Note:** This project is actively under development. The current implementation includes authentication, dashboard, and interview UI flow. AI-powered interview capabilities and evaluation features are planned for future development.
+# 📷 Screenshots
+
+> Screenshots will be added after UI completion.
+
+---
+
+# 👨‍💻 Author
+
+**Vinod Gawande**
+
+GitHub:
+https://github.com/VinodGawande

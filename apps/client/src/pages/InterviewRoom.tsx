@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 
 import InterviewHeader from "../components/interview/InterviewHeader";
+import ProgressBar from "../components/interview/ProgressBar";
 import CameraPreview from "../components/interview/CameraPreview";
 import MicrophoneStatus from "../components/interview/MicrophoneStatus";
 import QuestionPanel from "../components/interview/QuestionPanel";
@@ -19,18 +20,33 @@ export default function InterviewRoom() {
     onComplete: () => navigate("/interview/result"),
   });
 
-  const {
-    transcript,
-    isListening,
-    startListening,
-    stopListening,
-  } = useSpeechRecognition();
+ const {
+  transcript,
+  isListening,
+  startListening,
+  stopListening,
+  resetTranscript,
+} = useSpeechRecognition();
 
   const {
-    currentQuestion,
-    currentQuestionIndex,
-    totalQuestions,
-  } = useInterview();
+  currentQuestion,
+  currentQuestionIndex,
+  totalQuestions,
+  progress,
+  nextQuestion,
+  previousQuestion,
+  saveAnswer,
+} = useInterview();
+
+const handleNextQuestion = () => {
+  stopListening();
+
+  saveAnswer(transcript);
+
+  resetTranscript();
+
+  nextQuestion();
+};
 
   return (
     <div className="min-h-screen bg-slate-950 px-6 py-8 text-white">
@@ -41,7 +57,11 @@ export default function InterviewRoom() {
           timeLeft={formattedTime}
         />
 
-        <div className="mt-6 grid gap-6 lg:grid-cols-2">
+        <div className="mb-6">
+          <ProgressBar progress={progress} />
+        </div>
+
+        <div className="grid gap-6 lg:grid-cols-2">
           {/* Left Section */}
           <div className="space-y-4">
             <CameraPreview />
@@ -60,14 +80,19 @@ export default function InterviewRoom() {
         </div>
 
         <div className="mt-6">
-          <InterviewFooter
-            isRecording={isListening}
-            onStartRecording={startListening}
-            onStopRecording={stopListening}
-            onEndInterview={() => navigate("/interview/result")}
-          />
+         <InterviewFooter
+  isRecording={isListening}
+  isFirstQuestion={currentQuestionIndex === 0}
+  isLastQuestion={currentQuestionIndex === totalQuestions - 1}
+  onStartRecording={startListening}
+  onStopRecording={stopListening}
+  onPreviousQuestion={previousQuestion}
+  onNextQuestion={handleNextQuestion}
+  onEndInterview={() => navigate("/interview/result")}
+/>
         </div>
       </div>
     </div>
   );
 }
+

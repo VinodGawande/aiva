@@ -1,12 +1,17 @@
 import { useMemo, useState } from "react";
 import { interviewQuestions } from "../data/questions";
-import type { InterviewAnswer } from "../types/interview";
+import type {
+  InterviewAnswer,
+  InterviewQuestion,
+} from "../types/interview";
+
 
 export const useInterview = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+
   const [answers, setAnswers] = useState<InterviewAnswer[]>([]);
 
-  const currentQuestion = useMemo(
+  const currentQuestion: InterviewQuestion = useMemo(
     () => interviewQuestions[currentQuestionIndex],
     [currentQuestionIndex]
   );
@@ -31,14 +36,17 @@ export const useInterview = () => {
 
   const saveAnswer = (answer: string) => {
     setAnswers((prev) => {
-      const existing = prev.find(
+      const existingAnswer = prev.find(
         (item) => item.questionId === currentQuestion.id
       );
 
-      if (existing) {
+      if (existingAnswer) {
         return prev.map((item) =>
           item.questionId === currentQuestion.id
-            ? { ...item, answer }
+            ? {
+                ...item,
+                answer,
+              }
             : item
         );
       }
@@ -53,14 +61,33 @@ export const useInterview = () => {
     });
   };
 
+  const getCurrentAnswer = () => {
+    return (
+      answers.find(
+        (item) => item.questionId === currentQuestion.id
+      )?.answer || ""
+    );
+  };
+
+  const resetInterview = () => {
+    setCurrentQuestionIndex(0);
+    setAnswers([]);
+  };
+
   return {
     currentQuestion,
     currentQuestionIndex,
     totalQuestions,
     progress,
+
     answers,
+
     nextQuestion,
     previousQuestion,
+
     saveAnswer,
+    getCurrentAnswer,
+
+    resetInterview,
   };
 };
